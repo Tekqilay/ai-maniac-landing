@@ -42,52 +42,150 @@ export function SmoothScroll() {
    Static full-bleed layout is the CSS default (no-JS / reduced motion). */
 export function HeroTower() {
   const scope = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) return;
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: scope.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.6,
-        },
-      });
-      tl.fromTo(
-        ".ht-frame",
-        { width: "78%", height: "84%", borderRadius: 28 },
-        { width: "100%", height: "100%", borderRadius: 0, ease: "none", duration: 0.45 }
-      )
-        .fromTo(
-          ".ht-media",
-          { yPercent: -6, scale: 1.08 },
-          { yPercent: 0, scale: 1, ease: "none", duration: 1 },
-          0
+      const mm = gsap.matchMedia();
+
+      // Shared: the frame expands from a rounded 78% mask to full bleed,
+      // plus parallax and the scroll-darken pass.
+      const buildIntro = (tl: gsap.core.Timeline) => {
+        tl.fromTo(
+          ".ht-frame",
+          { width: "78%", height: "84%", borderRadius: 28 },
+          { width: "100%", height: "100%", borderRadius: 0, ease: "none", duration: 0.25 }
         )
-        .fromTo(
-          ".ht-darken",
-          { opacity: 0 },
-          { opacity: 0.45, ease: "none", duration: 0.55 },
-          0.45
-        );
+          .fromTo(
+            ".ht-media",
+            { yPercent: -6, scale: 1.08 },
+            { yPercent: 0, scale: 1, ease: "none", duration: 0.25 },
+            0
+          )
+          .fromTo(
+            ".ht-darken",
+            { opacity: 0 },
+            { opacity: 0.45, ease: "none", duration: 0.3 },
+            0.2
+          );
+      };
+
+      // Desktop with a real pointer: scroll drives video.currentTime.
+      mm.add(
+        "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const video = videoRef.current;
+          if (!video) return;
+          video.preload = "auto";
+          video.load();
+
+          // Safari/Chrome keep currentTime frozen until the element has been
+          // played once, so unlock it on the first user gesture.
+          const unlock = () => {
+            video.play().then(
+              () => video.pause(),
+              () => {}
+            );
+          };
+          const events = ["pointerdown", "wheel", "keydown", "touchstart"];
+          events.forEach((e) =>
+            window.addEventListener(e, unlock, { once: true, passive: true })
+          );
+
+          const playhead = { t: 0 };
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: scope.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.6,
+            },
+          });
+          buildIntro(tl);
+          // Phase B: the remaining stretch scrubs through the clip, so the
+          // windows light up in step with the scroll. Last frame stays.
+          tl.to(
+            playhead,
+            {
+              t: 1,
+              ease: "none",
+              duration: 0.75,
+              onUpdate: () => {
+                const d = video.duration;
+                if (!d || Number.isNaN(d)) return;
+                video.currentTime = Math.min(playhead.t * d, d - 0.05);
+              },
+            },
+            0.25
+          );
+
+          return () => {
+            events.forEach((e) => window.removeEventListener(e, unlock));
+          };
+        }
+      );
+
+      // Touch / small screens: no scrubbing — play the clip once on enter.
+      mm.add(
+        "(max-width: 767px), (pointer: coarse)",
+        () => {
+          if (prefersReducedMotion()) return;
+          const video = videoRef.current;
+          if (!video) return;
+          video.preload = "auto";
+          video.load();
+
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  video.play().catch(() => {});
+                  io.disconnect();
+                }
+              });
+            },
+            { threshold: 0.4 }
+          );
+          io.observe(video);
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: scope.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.6,
+            },
+          });
+          buildIntro(tl);
+
+          return () => io.disconnect();
+        }
+      );
+
+      return () => mm.revert();
     },
     { scope }
   );
 
   return (
-    <section ref={scope} className="relative h-[220vh] bg-[#0D1522]">
+    <section ref={scope} className="relative h-[320vh] bg-[#0D1522]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="ht-frame relative w-full h-full overflow-hidden">
+          {/* poster is frame 1 of the clip, so the static state matches the
+              video framing exactly. preload stays "none" until a motion
+              branch opts in — reduced motion never loads the video. */}
           <video
+            ref={videoRef}
             className="ht-media absolute inset-0 w-full h-full object-cover object-[42%_center] sm:object-[72%_center]"
-            poster="/assets/hero-tower-dusk.webp"
+            poster="/assets/poster_lights.png"
             muted
-            loop
             playsInline
             preload="none"
-            aria-label="Glas-Büroturm bei Abenddämmerung, einzelne Fenster warm erleuchtet"
-          />
+            aria-label="Glas-Büroturm bei Abenddämmerung, in dem nach und nach Fenster warm erleuchtet werden"
+          >
+            <source src="/assets/scrub_lights.webm" type="video/webm" />
+            <source src="/assets/scrub_lights.mp4" type="video/mp4" />
+          </video>
           <div className="ht-darken absolute inset-0 bg-[#060A12] opacity-40 pointer-events-none" />
           {/* static readability gradient behind the copy, independent of the scrub darken */}
           <div className="absolute inset-y-0 left-0 w-full sm:w-3/5 bg-gradient-to-r from-[#060A12]/55 to-transparent pointer-events-none" />
