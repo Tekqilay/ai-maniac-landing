@@ -41,6 +41,9 @@ export function SmoothScroll() {
    <video> with poster so the premium video drops in later untouched.
    Static full-bleed layout is the CSS default (no-JS / reduced motion). */
 const COUNTER_TARGET = 30;
+// Last frame of the clip — the state reduced motion is shown, because the
+// message is the full calendar, not the empty one.
+const POSTER_END = "/assets/poster_lights_end.png";
 
 export function HeroTower({
   scrubStart = 0,
@@ -196,20 +199,45 @@ export function HeroTower({
             else setCount(1);
           };
 
-          const io = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  if (scrubStart > 0) video.currentTime = scrubStart;
-                  video.play().catch(() => setCount(1));
-                  raf = requestAnimationFrame(tick);
-                  io.disconnect();
-                }
-              });
-            },
-            { threshold: 0.4 }
-          );
-          io.observe(video);
+          // Park on the start frame and wait: playback begins with the
+          // first real scroll, not on load — otherwise the animation is
+          // over before the visitor ever moves.
+          const parkAtStart = () => {
+            if (scrubStart > 0) video.currentTime = scrubStart;
+          };
+          video.addEventListener("loadedmetadata", parkAtStart, { once: true });
+
+          let started = false;
+          const startY = window.scrollY;
+          const start = () => {
+            if (started) return;
+            started = true;
+            parkAtStart();
+            video.play().catch(() => setCount(1));
+            raf = requestAnimationFrame(tick);
+            teardownStart();
+          };
+          const onScroll = () => {
+            if (window.scrollY !== startY) start();
+          };
+          let touchY: number | null = null;
+          const onTouchStart = (e: TouchEvent) => {
+            touchY = e.touches[0]?.clientY ?? null;
+          };
+          const onTouchMove = (e: TouchEvent) => {
+            const y = e.touches[0]?.clientY;
+            if (touchY !== null && y !== undefined && Math.abs(y - touchY) > 4) {
+              start();
+            }
+          };
+          const teardownStart = () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("touchstart", onTouchStart);
+            window.removeEventListener("touchmove", onTouchMove);
+          };
+          window.addEventListener("scroll", onScroll, { passive: true });
+          window.addEventListener("touchstart", onTouchStart, { passive: true });
+          window.addEventListener("touchmove", onTouchMove, { passive: true });
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -222,11 +250,22 @@ export function HeroTower({
           buildIntro(tl);
 
           return () => {
-            io.disconnect();
+            teardownStart();
+            video.removeEventListener("loadedmetadata", parkAtStart);
             cancelAnimationFrame(raf);
           };
         }
       );
+
+      // Reduced motion: show the end state — bright scene, last frame,
+      // counter already at its target. No video is ever loaded.
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        const video = videoRef.current;
+        if (video) video.poster = POSTER_END;
+        gsap.set(".ht-darken", { opacity: 0.12 });
+        gsap.set(".ht-warm", { opacity: 0.1 });
+        setCount(1);
+      });
 
       return () => mm.revert();
     },
