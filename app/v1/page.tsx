@@ -184,28 +184,35 @@ export default function V1Page() {
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#6B6B64] mb-4">
               Eigener Vertriebler
             </p>
-            <p className="[font-family:var(--v1-display)] font-black text-2xl sm:text-3xl mb-6">
-              3.500 € im Monat, fix.
+            <p className="[font-family:var(--v1-display)] font-black text-2xl sm:text-3xl mb-3">
+              ~5.200 € im Monat.
+            </p>
+            <p className="text-sm text-[#6B6B64] leading-relaxed mb-6">
+              Ø 4.176 € Bruttogehalt im B2B-Vertrieb, plus Lohnnebenkosten und
+              Arbeitsplatz — Provision kommt noch obendrauf.
             </p>
             <ul className="space-y-3 text-[#3A3A36] leading-relaxed">
-              <li>Plus Provision, plus Einarbeitung, plus Ausfallrisiko.</li>
-              <li>Ruft kalt an — die meisten Gespräche beginnen mit einem Nein.</li>
-              <li>Braucht Monate, bis eine eigene Pipeline steht.</li>
+              <li>Läuft ab Tag 1 — auch in Monaten, in denen kein einziger Termin steht.</li>
+              <li>Recruiting, Einarbeitung, Führung: Ihre Zeit, bevor die erste Pipeline steht.</li>
+              <li>Fehlbesetzung nach sechs Monaten? Alles von vorn.</li>
             </ul>
           </div>
           <div className="md:pl-12">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#6B6B64] mb-4">
               Termine aus dem Postfach
             </p>
-            <p className="[font-family:var(--v1-display)] font-black text-2xl sm:text-3xl mb-6">
+            <p className="[font-family:var(--v1-display)] font-black text-2xl sm:text-3xl mb-3">
               <span className="bg-[#F7E948] box-decoration-clone px-1">
-                Warme Termine.
+                Ihr Aufwand: zwei Termine.
               </span>
             </p>
+            <p className="text-sm text-[#6B6B64] leading-relaxed mb-6">
+              Onboarding und Erstgespräch. Danach läuft es.
+            </p>
             <ul className="space-y-3 text-[#3A3A36] leading-relaxed">
-              <li>Der Geschäftsführer hat geantwortet, bevor Sie sprechen.</li>
-              <li>Terminvorschlag steckt in jeder Mail — bestätigen genügt.</li>
-              <li>Sie führen nur noch das Gespräch. Den Rest machen wir.</li>
+              <li>Mails gehen raus, jede Antwort wird sofort beantwortet — rund um die Uhr.</li>
+              <li>Bestätigte Termine landen direkt in Ihrem Kalender.</li>
+              <li>Ihr Team führt nur noch die Gespräche.</li>
             </ul>
           </div>
         </div>
@@ -220,7 +227,7 @@ export default function V1Page() {
           {[
             {
               q: "Warum nicht einfach einen Vertriebler einstellen?",
-              a: "Können Sie machen: 3.500 € fix im Monat, plus Provision, plus Einarbeitung — und er beginnt jeden Tag mit kalten Anrufen. Unsere Kampagnen kosten einen Bruchteil davon und liefern Antworten von Geschäftsführern, die von sich aus reden wollen.",
+              a: "Können Sie — rechnen Sie nur ehrlich: Ein eigener B2B-Vertriebler kostet real über 5.000 € im Monat, bevor Provision und Ihre Einarbeitungszeit dazukommen. Die Fixkosten laufen auch in Monaten ohne einen einzigen Termin. Bei uns haben Sie nach dem Onboarding keinen Aufwand mehr — und die Termine stehen im Kalender.",
             },
             {
               q: "Wie viele Termine kommen wirklich?",
