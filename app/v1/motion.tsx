@@ -40,7 +40,14 @@ export function SmoothScroll() {
    parallax + scroll-darken (sstr initHeroScrollDarken). Element is a
    <video> with poster so the premium video drops in later untouched.
    Static full-bleed layout is the CSS default (no-JS / reduced motion). */
-export function HeroTower() {
+export function HeroTower({
+  scrubStart = 0,
+  poster = "/assets/poster_lights.png",
+}: {
+  // Seconds into the clip where the scrub (and the poster frame) begin.
+  scrubStart?: number;
+  poster?: string;
+}) {
   const scope = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -83,10 +90,20 @@ export function HeroTower() {
           // played once, so unlock it on the first user gesture.
           const unlock = () => {
             video.play().then(
-              () => video.pause(),
+              () => {
+                video.pause();
+                if (scrubStart > 0 && video.currentTime < scrubStart) {
+                  video.currentTime = scrubStart;
+                }
+              },
               () => {}
             );
           };
+          // Park the playhead on the start frame as soon as it can seek.
+          const seekToStart = () => {
+            if (scrubStart > 0) video.currentTime = scrubStart;
+          };
+          video.addEventListener("loadedmetadata", seekToStart, { once: true });
           const events = ["pointerdown", "wheel", "keydown", "touchstart"];
           events.forEach((e) =>
             window.addEventListener(e, unlock, { once: true, passive: true })
@@ -113,7 +130,11 @@ export function HeroTower() {
               onUpdate: () => {
                 const d = video.duration;
                 if (!d || Number.isNaN(d)) return;
-                video.currentTime = Math.min(playhead.t * d, d - 0.05);
+                const end = d - 0.05;
+                video.currentTime = Math.min(
+                  scrubStart + playhead.t * (end - scrubStart),
+                  end
+                );
               },
             },
             0.25
@@ -121,6 +142,7 @@ export function HeroTower() {
 
           return () => {
             events.forEach((e) => window.removeEventListener(e, unlock));
+            video.removeEventListener("loadedmetadata", seekToStart);
           };
         }
       );
@@ -139,6 +161,7 @@ export function HeroTower() {
             (entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
+                  if (scrubStart > 0) video.currentTime = scrubStart;
                   video.play().catch(() => {});
                   io.disconnect();
                 }
@@ -177,7 +200,7 @@ export function HeroTower() {
           <video
             ref={videoRef}
             className="ht-media absolute inset-0 w-full h-full object-cover object-[42%_center] sm:object-[72%_center]"
-            poster="/assets/poster_lights.png"
+            poster={poster}
             muted
             playsInline
             preload="none"
