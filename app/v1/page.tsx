@@ -1,6 +1,14 @@
 import { Archivo, IBM_Plex_Sans } from "next/font/google";
 import { BRAND } from "@/lib/brand";
-import { SmoothScroll, HeroEmailCard, Count, ProcessTimeline } from "./motion";
+import {
+  SmoothScroll,
+  HeroTower,
+  HeroEmailCard,
+  TextFill,
+  CalendarWeek,
+  Count,
+  ProcessTimeline,
+} from "./motion";
 
 const display = Archivo({
   subsets: ["latin"],
@@ -18,50 +26,54 @@ const body = IBM_Plex_Sans({
 export default function V1Page() {
   return (
     <div
-      className={`${display.variable} ${body.variable} min-h-screen overflow-x-hidden bg-[#FBFBF9] text-[#1A1A18] [font-family:var(--v1-body)] selection:bg-[#F7E948]`}
+      className={`${display.variable} ${body.variable} relative min-h-screen overflow-x-clip bg-[#FBFBF9] text-[#1A1A18] [font-family:var(--v1-body)] selection:bg-[#F7E948]`}
     >
       <SmoothScroll />
 
-      {/* Nav */}
-      <header className="flex items-center justify-between px-6 sm:px-12 py-5 border-b border-[#1A1A18]/10">
-        <span className="[font-family:var(--v1-display)] font-black tracking-tight text-lg">
+      {/* Nav — overlays the cinematic hero */}
+      <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 sm:px-12 py-5">
+        <span className="[font-family:var(--v1-display)] font-black tracking-tight text-lg text-white">
           {BRAND}
         </span>
         <a
           href="#"
-          className="bg-[#1A1A18] text-[#FBFBF9] text-sm font-semibold px-5 py-2.5 transition-colors duration-300 ease-out hover:bg-[#3A3A36]"
+          className="border border-white/60 text-white text-sm font-semibold px-5 py-2.5 transition-colors duration-300 ease-out hover:bg-white hover:text-[#1A1A18]"
         >
           Erstgespräch vereinbaren
         </a>
       </header>
 
-      {/* 1 — Hero, asymmetric 60/40 */}
-      <section className="px-6 sm:px-12 pt-16 pb-20 sm:pt-24 sm:pb-28 grid gap-14 lg:grid-cols-[3fr_2fr] lg:gap-10 max-w-7xl mx-auto items-start">
+      {/* 1 — Hero: "Die Lichter gehen an" */}
+      <HeroTower />
+
+      {/* 2 — The email that made that appointment */}
+      <section className="px-6 sm:px-12 pt-20 pb-16 sm:pt-28 sm:pb-20 max-w-7xl mx-auto grid gap-12 lg:grid-cols-[2fr_3fr] items-center">
         <div>
-          <p className="text-sm font-medium text-[#6B6B64] mb-6 max-w-md leading-relaxed">
-            Sie lesen das hier, weil eine E-Mail von uns Sie neugierig gemacht
-            hat. Genau so gewinnen Sie Ihre nächsten Kunden.
+          <h2 className="[font-family:var(--v1-display)] font-black text-3xl sm:text-4xl tracking-tight mb-5">
+            Die Mail, die das Licht anmacht
+          </h2>
+          <p className="text-[#3A3A36] leading-relaxed max-w-md">
+            Keine Massenware, kein Newsletter-Ton: zwei Sätze zur Agentur, ein
+            konkreter Nutzen und ein Terminvorschlag, der nur bestätigt werden
+            muss.
           </p>
-          <h1 className="[font-family:var(--v1-display)] font-black text-[clamp(2.6rem,6.2vw,4.6rem)] leading-[1.02] tracking-tight mb-8">
-            Ihr Kalender füllt sich{" "}
-            <span className="relative inline-block">
-              <span className="absolute inset-x-[-0.15em] bottom-[0.05em] top-[0.28em] bg-[#F7E948]" />
-              <span className="relative">von selbst.</span>
-            </span>
-          </h1>
-          <p className="text-lg text-[#3A3A36] max-w-xl leading-relaxed mb-10">
-            Cold-E-Mail-Terminierung für Recruiting-Agenturen: Wir schreiben
-            Geschäftsführer direkt an, mit Terminvorschlag in jeder Mail. Wer
-            antwortet, will reden.
-          </p>
-          <a
-            href="#"
-            className="inline-block bg-[#1A1A18] text-[#FBFBF9] font-semibold px-8 py-4 transition-colors duration-300 ease-out hover:bg-[#3A3A36]"
-          >
-            Erstgespräch vereinbaren
-          </a>
         </div>
-        <HeroEmailCard />
+        <div className="max-w-xl w-full justify-self-end">
+          <HeroEmailCard />
+        </div>
+      </section>
+
+      {/* 3 — Core statement, word-by-word fill */}
+      <section className="px-6 sm:px-12 py-20 sm:py-28 max-w-5xl mx-auto">
+        <TextFill
+          className="[font-family:var(--v1-display)] font-bold text-[clamp(1.6rem,3.6vw,2.6rem)] leading-snug tracking-tight"
+          text="Jedes erleuchtete Fenster ist ein Geschäftsführer, der gerade einem Termin zugestimmt hat. Wir schreiben ihn an, schlagen die Uhrzeit vor und legen den Termin in Ihren Kalender. Sie machen das Licht an."
+        />
+      </section>
+
+      {/* 4 — The week after: real HTML calendar, blocks drop in on scroll */}
+      <section className="border-t border-[#1A1A18]/10">
+        <CalendarWeek />
       </section>
 
       {/* 2 — Process: the 4 months as a timeline */}
