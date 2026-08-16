@@ -48,15 +48,14 @@ export function HeroHeadline() {
       ref={ref}
       className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight text-white mb-6"
     >
-      <W>Your</W>{" "}
-      <W>calls</W>{" "}
-      <W>turn</W>{" "}
-      <W>into</W>{" "}
-      <W gradient>ready-to-use</W>{" "}
-      <W gradient>documents.</W>{" "}
-      <W>Automatically.</W>{" "}
-      <W>Every</W>{" "}
-      <W>time.</W>
+      <W>Jeder</W>{" "}
+      <W>Anruf</W>{" "}
+      <W>wird</W>{" "}
+      <W>zur</W>{" "}
+      <W gradient>Auftrags-</W>{" "}
+      <W gradient>Notiz</W>{" "}
+      <W gradient>—</W>{" "}
+      <W gradient>automatisch.</W>
     </h1>
   );
 }

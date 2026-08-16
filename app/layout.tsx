@@ -9,16 +9,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "The AI Maniac — Your Calls. Automatically Documented.",
+  title: "Firmengedächtnis für Elektro-Großhandel — The AI Maniac",
   description:
-    "Record your call. Get custom documents in minutes. No manual work, no copy-pasting. Built for coaches, consultants, and sales teams.",
+    "Automatische Call-Dokumentation für den Elektro-Großhandel Innendienst. Jeder Anruf wird zur Bestellnotiz, zum Angebots-Draft, zum Reklamations-Protokoll — ohne Tippen, ohne Vergessen.",
   openGraph: {
-    title: "The AI Maniac — Your Calls. Automatically Documented.",
+    title: "Firmengedächtnis für Elektro-Großhandel — The AI Maniac",
     description:
-      "Record your call. Get custom documents in minutes. Built for coaches, consultants, and sales teams.",
+      "Jeder eingehende Call im Innendienst wird automatisch dokumentiert. Bestellnotiz, Angebot, Reklamation, Beratungs-Protokoll — direkt vom Schreibtisch-PC.",
     url: "https://theaimaniac.com",
     siteName: "The AI Maniac",
-    locale: "en_US",
+    locale: "de_DE",
     type: "website",
   },
 };
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark h-full antialiased">
+    <html lang="de" className="dark h-full antialiased">
       <body
         className={`${plusJakartaSans.variable} font-[family-name:var(--font-plus-jakarta)] min-h-full flex flex-col bg-slate-950 text-slate-50`}
       >

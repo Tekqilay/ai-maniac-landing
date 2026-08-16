@@ -38,7 +38,7 @@ export default function LandingPage() {
           rel="noopener noreferrer"
           className="hidden sm:inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors duration-200 cursor-pointer"
         >
-          Book a free call <ArrowRight className="w-4 h-4" />
+          Kostenloses Gespräch buchen <ArrowRight className="w-4 h-4" />
         </Link>
       </nav>
 
@@ -49,7 +49,7 @@ export default function LandingPage() {
         <FadeIn delay={0.1}>
           <div className="inline-flex items-center gap-2 bg-blue-950/60 border border-blue-800/50 text-blue-400 text-xs font-semibold px-4 py-1.5 rounded-full mb-8 tracking-wide uppercase">
             <Zap className="w-3.5 h-3.5" />
-            AI-Powered Documentation
+            Firmengedächtnis für den Elektro-Großhandel
           </div>
         </FadeIn>
 
@@ -57,9 +57,9 @@ export default function LandingPage() {
 
         <FadeIn delay={0.35}>
           <p className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Stop wasting 20–40 minutes after every call writing summaries and
-            follow-ups. Record your call — your documents are ready within
-            minutes, formatted exactly the way you need them.
+            Jeder eingehende Call in Ihrem Innendienst wird automatisch
+            dokumentiert. Bestellnotiz, Angebots-Draft, Reklamations-Protokoll,
+            Beratungs-Memo. Ohne Tippen, ohne Vergessen, ohne Nachhaken.
           </p>
         </FadeIn>
 
@@ -71,9 +71,9 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-base font-semibold px-8 py-4 rounded-xl transition-colors duration-200 shadow-lg shadow-blue-900/40 cursor-pointer"
             >
-              Book your free 15-min call <ArrowRight className="w-5 h-5" />
+              Kostenloses 15-Min Gespräch buchen <ArrowRight className="w-5 h-5" />
             </ShimmerLink>
-            <span className="text-slate-500 text-sm">No commitment. No pitch deck.</span>
+            <span className="text-slate-500 text-sm">Keine Verpflichtung. Kein Pitch.</span>
           </div>
         </FadeIn>
         </div>
@@ -87,7 +87,7 @@ export default function LandingPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-8">
-              Who&apos;s Behind This
+              Wer dahinter steht
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -103,20 +103,23 @@ export default function LandingPage() {
               </div>
               <div>
                 <h3 className="text-white text-xl font-bold mb-3">
-                  Built by someone who uses this every day.
+                  Gebaut von jemandem, der es selbst täglich nutzt.
                 </h3>
                 <p className="text-slate-400 leading-relaxed mb-4">
-                  I&apos;m Tekinay — I build AI automation systems for coaches,
-                  consultants, sales teams, real estate agents, recruiters, and
-                  anyone whose business runs on client calls. I started The AI
-                  Maniac because I kept seeing the same problem: capable people
-                  wasting hours every week on documentation that a well-built
-                  system could handle automatically.
+                  Ich bin Tekinay — ich baue KI-Systeme für Firmen, deren
+                  Tagesgeschäft am Telefon passiert. Elektro-Großhandel,
+                  Sanitär-Großhandel, technischer B2B-Vertrieb. Überall das
+                  gleiche Bild: Innendienst-Mitarbeiter führen 20+ Calls am
+                  Tag, und nach jedem Call sollen sie sich hinsetzen und alles
+                  nochmal von Hand tippen. Das ist verschwendete Zeit, und es
+                  geht viel dabei verloren.
                 </p>
                 <p className="text-slate-400 leading-relaxed">
-                  Every system I build is custom. There&apos;s no template you
-                  fill in yourself, no generic tool to figure out. I build it for
-                  you, test it with your actual workflow, and hand it over working.
+                  Jedes System das ich baue, ist individuell. Keine generischen
+                  Vorlagen zum selbst Ausfüllen, kein Tool das Sie erst
+                  verstehen müssen. Ich baue es für Sie, passe es an Ihre
+                  Artikelstruktur und Ihre Doc-Formate an, teste es mit Ihren
+                  echten Calls und übergebe es Ihrem Team betriebsbereit.
                 </p>
               </div>
             </div>
@@ -129,19 +132,21 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-4">
-              The Problem
+              Das Problem
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-6 max-w-2xl mx-auto leading-tight">
-              Every week, your team loses{" "}
+              Ihr Innendienst verbrennt jeden Tag{" "}
               <span className="text-blue-400">
-                <AnimatedCounter target={8} suffix=" hours" />
+                <AnimatedCounter target={10} suffix=" Stunden" />
               </span>{" "}
-              to documentation nobody wants to write.
+              in manueller Call-Doku.
             </h2>
             <p className="text-center text-slate-400 max-w-2xl mx-auto mb-16 text-lg leading-relaxed">
-              After every sales call, onboarding session, or client meeting —
-              someone has to sit down and write it all up. Manually. Every single
-              time. That&apos;s not just annoying. It&apos;s a real business problem.
+              10 Innendienst-Mitarbeiter, jeder 20 Calls am Tag, jeder Call
+              kostet 3 Minuten Notiz-Tipperei. Das sind 10 Stunden
+              Personalkosten pro Tag — jeden Tag, jede Woche — nur um
+              Bestellungen, Reklamationen und Rückfragen zu dokumentieren,
+              die das Telefon bereits gesagt hat.
             </p>
           </FadeIn>
 
@@ -149,18 +154,18 @@ export default function LandingPage() {
             {[
               {
                 icon: <Clock className="w-5 h-5 text-red-400" />,
-                title: "20–40 minutes wasted per call",
-                desc: "Your team spends nearly half an hour after every call typing up notes, summaries, and follow-up documents from memory. That&apos;s hours per week — gone.",
+                title: "3 Minuten verloren pro Call",
+                desc: "Nach jedem Call sitzt der Mitarbeiter und tippt: Artikel, Menge, Preis, Liefertermin, Kontaktperson. Bei 20 Calls sind das 60 Minuten reine Doku-Zeit pro Kopf — jeden Tag.",
               },
               {
                 icon: <TrendingDown className="w-5 h-5 text-orange-400" />,
-                title: "Details get lost",
-                desc: "The longer you wait to write it up, the more gets forgotten. Key client details, agreed next steps, specific pain points — they slip through the cracks and cost you deals.",
+                title: "Bestell-Chaos und vergessene Details",
+                desc: "Artikelnummer halb notiert, Liefertermin im Kopf, Sonderwunsch im Zettel auf dem Schreibtisch. Fehler beim Auftrag, Nachfragen beim Kunden, verärgerte Lieferanten — jede Woche.",
               },
               {
                 icon: <Users className="w-5 h-5 text-yellow-400" />,
-                title: "You're paying people to do admin",
-                desc: "If you have employees doing this manually, you&apos;re literally paying professional salaries for copy-pasting and reformatting. It&apos;s expensive, soul-crushing work that nobody should be doing in 2026.",
+                title: "Kundenwissen klebt an einem Kopf",
+                desc: "Wenn Ihr erfahrener Innendienstler krank wird oder kündigt — was bleibt? Welche Sonderkonditionen welcher Kunde hat, welche Projekte laufen, welche Lieferanten-Deals. Alles weg. Einarbeitung dauert Monate.",
               },
             ].map((item) => (
               <StaggerItem key={item.title}>
@@ -172,10 +177,9 @@ export default function LandingPage() {
                     <h3 className="text-white font-semibold text-lg mb-3">
                       {item.title}
                     </h3>
-                    <p
-                      className="text-slate-400 text-sm leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: item.desc }}
-                    />
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 </TiltCard>
               </StaggerItem>
@@ -185,13 +189,13 @@ export default function LandingPage() {
           <FadeIn>
             <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 max-w-3xl mx-auto">
               <p className="text-slate-300 text-lg leading-relaxed text-center">
-                The real cost isn&apos;t just the time. It&apos;s the{" "}
-                <span className="text-white font-semibold">inconsistency</span> —
-                every document looks slightly different, every summary has a
-                different format. Clients notice. It makes you look less
-                professional than you actually are.{" "}
+                Der echte Schaden ist nicht nur die Zeit. Es ist die{" "}
+                <span className="text-white font-semibold">Abhängigkeit</span> —
+                jeder Kunde hat „seinen“ Ansprechpartner, jeder Prozess lebt
+                im Kopf eines einzelnen Mitarbeiters. Jede Einarbeitung dauert
+                6 Monate, jede Kündigung kostet Umsatz.{" "}
                 <span className="text-white font-semibold">
-                  And none of it had to happen.
+                  Und nichts davon müsste so sein.
                 </span>
               </p>
             </div>
@@ -204,14 +208,15 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-4">
-              How It Works
+              So läuft es ab
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
-              Three steps. Zero manual work.
+              Drei Schritte. Null manueller Aufwand.
             </h2>
             <p className="text-center text-slate-400 mb-16 max-w-xl mx-auto">
-              We build the system once, customized to your exact workflow. After
-              that, you just record and everything happens automatically.
+              Wir installieren die Recorder-App auf jedem Innendienst-PC und
+              bauen die Doc-Vorlagen auf Ihre Artikelstruktur zu. Danach läuft
+              alles im Hintergrund, während Ihr Team telefoniert.
             </p>
           </FadeIn>
 
@@ -222,20 +227,20 @@ export default function LandingPage() {
               {
                 icon: <Mic className="w-6 h-6 text-blue-400" />,
                 step: "01",
-                title: "Record your call",
-                desc: "Open the desktop app, click record. Works with any call type — sales calls, onboarding sessions, client meetings, strategy calls. One click to start, one click to stop.",
+                title: "Call am PC mitschneiden",
+                desc: "Die Desktop-App läuft auf dem Innendienst-PC und nimmt bei jedem Call Mikrofon und System-Audio auf — egal ob Zoom, Teams, Softphone oder Browser-Telefonie. Ein Klick Start, ein Klick Stop. Die Datei landet automatisch im Google Drive.",
               },
               {
                 icon: <FileText className="w-6 h-6 text-blue-400" />,
                 step: "02",
-                title: "Auto-transcription & AI processing",
-                desc: "Your audio is transcribed automatically with high accuracy and runs through your custom AI workflow. No uploads, no copy-pasting, no manual triggers.",
+                title: "Transkription & KI-Verarbeitung",
+                desc: "Die Aufnahme wird mit hoher Genauigkeit transkribiert und durch Ihre individuellen KI-Workflows geschickt. Jede Vorlage kennt Ihre Artikel, Ihre Kunden, Ihre Lieferanten. Kein Upload, kein Copy-Paste.",
               },
               {
                 icon: <Inbox className="w-6 h-6 text-blue-400" />,
                 step: "03",
-                title: "Documents arrive",
-                desc: "Your custom documents land in your inbox or Drive within minutes — formatted exactly how you need them, with your terminology, your structure, ready to send or file.",
+                title: "Dokumente erscheinen",
+                desc: "Bestellnotiz, Reklamations-Protokoll, Angebots-Draft — landen in Ihrem Postfach oder Drive, sortiert pro Call und pro Mitarbeiter. Innerhalb von Minuten, im exakten Format das Ihr ERP-Prozess braucht.",
               },
             ].map((item) => (
               <StaggerItem key={item.step}>
@@ -257,15 +262,16 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-4">
-              What&apos;s Included
+              Was drin ist
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
-              Everything set up. Nothing to figure out.
+              Komplett eingerichtet. Nichts zum selbst herausfinden.
             </h2>
             <p className="text-center text-slate-400 mb-16 max-w-xl mx-auto">
-              We don&apos;t hand you a tool and wish you luck. We build your system
-              end-to-end, test it with your actual calls, and make sure it runs
-              perfectly before you ever use it.
+              Wir geben Ihnen kein Tool in die Hand und wünschen Ihnen Glück.
+              Wir installieren die Recorder-App auf jedem Innendienst-PC,
+              bauen die Doc-Vorlagen auf Ihr Sortiment zu und testen mit
+              echten Calls — bevor Ihr Team das System das erste Mal nutzt.
             </p>
           </FadeIn>
 
@@ -274,18 +280,19 @@ export default function LandingPage() {
               <TiltCard className="h-full">
               <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 h-full">
                 <p className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-4">
-                  One-time Setup
+                  Einmaliges Setup
                 </p>
                 <h3 className="text-white text-xl font-bold mb-6">
-                  We build it. You use it.
+                  Wir bauen es. Ihr Team nutzt es.
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    "Onboarding call to map your exact call types and document needs",
-                    "Custom document templates built to your format and style",
-                    "Full system setup — recording, transcription, AI workflows",
-                    "Live testing with your real calls before handover",
-                    "Training session so you're confident from day one",
+                    "Prozess-Audit Call — wir kartieren Ihre Call-Typen, Ihre Artikelstruktur und welche Doc-Formate Ihr ERP-Prozess braucht",
+                    "12 individuelle Doc-Vorlagen für den Elektro-Großhandel (Bestellnotiz, Angebots-Draft, Reklamation, Beratungs-Protokoll, Lieferanten-Abstimmung uvm.)",
+                    "Installation der Recorder-App auf jedem Innendienst-PC",
+                    "Komplettes Workflow-Setup — Google Drive, Transkription, KI-Verarbeitung, Verteilung in Ihre Postfächer",
+                    "Live-Test mit echten Calls vor dem Roll-out",
+                    "Team-Schulung — Ihre Innendienst-Mitarbeiter sind ab Tag eins sicher im Umgang",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -301,17 +308,17 @@ export default function LandingPage() {
               <TiltCard className="h-full">
               <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 h-full">
                 <p className="text-blue-400 text-xs font-bold uppercase tracking-widest mb-4">
-                  Monthly Retainer
+                  Laufende Betreuung
                 </p>
                 <h3 className="text-white text-xl font-bold mb-6">
-                  Runs. Every month. Without you touching it.
+                  Läuft. Jeden Monat. Ohne dass Sie etwas tun müssen.
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    "System monitoring and maintenance — we catch issues before you notice them",
-                    "Template adjustments as your workflow evolves",
-                    "Direct support channel — fast responses, no ticket queues",
-                    "Regular check-ins to make sure the system still fits your needs",
+                    "System-Monitoring — wir sehen Probleme bevor Ihr Innendienst sie bemerkt",
+                    "Vorlagen-Anpassungen wenn neue Lieferanten, neue Artikel oder neue Prozesse dazukommen",
+                    "Direkter Support-Kanal für Ihre Niederlassung — keine Ticket-Warteschlangen",
+                    "Regelmäßige Check-ins, damit das System mit Ihrer Firma mitwächst",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -331,7 +338,7 @@ export default function LandingPage() {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-12">
-              Real Results
+              Echte Ergebnisse
             </p>
           </FadeIn>
 
@@ -349,19 +356,26 @@ export default function LandingPage() {
                 </div>
                 <div>
                   <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed mb-6">
-                    &ldquo;I just record the call and the documents are there. I
-                    don&apos;t think about it anymore.&rdquo;
+                    „Ich nehme einfach das Gespräch auf und die Dokumente sind
+                    da. Ich denke nicht mehr darüber nach.“
                   </p>
                   <div className="mb-6">
                     <p className="text-white font-semibold">Paul Arens</p>
                     <p className="text-slate-500 text-sm">SA Marketing GmbH</p>
                   </div>
                   <p className="text-slate-400 text-sm leading-relaxed">
-                    Paul runs a recruitment and sales consultancy. Before, his
-                    team was manually writing up summaries after every sales call
-                    and onboarding session. Now the system generates 3 different
-                    document types automatically per call. Setup took one week.
-                    It&apos;s been running for months without a single manual intervention.
+                    Paul führt eine Recruiting- und Vertriebsberatung. Vorher
+                    hat sein Team nach jedem Sales-Call und jeder Onboarding-Session
+                    manuell Zusammenfassungen geschrieben. Jetzt erstellt das
+                    System automatisch 3 verschiedene Dokumenttypen pro Call.
+                    Setup-Zeit: eine Woche. Läuft seit Monaten ohne einen
+                    einzigen manuellen Eingriff.
+                  </p>
+                  <p className="text-slate-500 text-xs leading-relaxed mt-4 italic">
+                    Das Grundsystem läuft branchenübergreifend — die
+                    Version für den Elektro-Großhandel ist individuell auf
+                    Bestell-Calls, Reklamationen, Angebote und
+                    Lieferanten-Abstimmung im Innendienst angepasst.
                   </p>
                 </div>
               </div>
@@ -370,9 +384,9 @@ export default function LandingPage() {
 
           <StaggerChildren className="mt-8 grid grid-cols-3 gap-4 text-center">
             {[
-              { value: "3", label: "Document types automated" },
-              { value: "1 week", label: "Setup time" },
-              { value: "0", label: "Manual work per call" },
+              { value: "3", label: "Dokumenttypen automatisiert" },
+              { value: "1 Woche", label: "Setup-Zeit" },
+              { value: "0", label: "Manuelle Arbeit pro Gespräch" },
             ].map((stat) => (
               <StaggerItem key={stat.label}>
                 <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4 cursor-default">
@@ -390,20 +404,27 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <p className="text-center text-blue-500 text-sm font-semibold uppercase tracking-widest mb-4">
-              Pricing
+              Preise
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
-              One-time setup. Low monthly retainer.
+              Einmaliges Setup. Niedrige Monatspauschale.
             </h2>
-            <p className="text-center text-slate-400 mb-8 max-w-xl mx-auto">
-              We build your system once. You use it forever. No per-seat fees, no
-              usage limits.
+            <p className="text-center text-slate-400 mb-4 max-w-xl mx-auto">
+              Wir bauen Ihr System einmal auf Ihren Innendienst zu. Sie nutzen
+              es jahrelang. Keine Nutzer-Gebühren, keine Call-Limits.
+            </p>
+            <p className="text-center text-slate-500 mb-8 max-w-2xl mx-auto text-sm">
+              Rechenbeispiel: 10 Innendienst-MA × 20 Calls/Tag × 3 Min Notiz
+              = 10 Stunden/Tag manuelle Doku. Das sind rund{" "}
+              <span className="text-blue-400 font-semibold">7.000€/Monat Personalkosten</span>,
+              die Sie aktuell ins Tippen stecken — gegen 497€/Monat für das
+              Firmengedächtnis.
             </p>
             <div className="flex flex-wrap justify-center gap-3 mb-14">
               {[
-                "Fully custom — built for your exact workflow",
-                "No generic templates",
-                "No other provider does this at this price",
+                "Individuell für Elektro-Großhandel gebaut",
+                "Keine generischen Vorlagen",
+                "Einsatzbereit in 2 Wochen",
               ].map((badge) => (
                 <span
                   key={badge}
@@ -419,42 +440,46 @@ export default function LandingPage() {
             {[
               {
                 name: "Starter",
-                desc: "1–2 document types",
-                setup: "€800",
-                monthly: "€200",
+                desc: "3 Doc-Types — der schmale Einstieg",
+                setup: "1.497€",
+                monthly: "297€",
                 features: [
-                  "Up to 2 custom document templates",
-                  "Full system setup & testing",
-                  "Onboarding call",
-                  "Monthly maintenance & support",
+                  "3 Doc-Vorlagen: Bestellnotiz, Reklamation, ToDo-Liste Team",
+                  "Installation auf bis zu 5 Innendienst-PCs",
+                  "Grund-Setup & Testing",
+                  "Onboarding-Call",
+                  "Monatlicher Support",
                 ],
                 highlight: false,
               },
               {
-                name: "Standard",
-                desc: "3–4 document types",
-                setup: "€1,200",
-                monthly: "€250",
+                name: "Firmengedächtnis",
+                desc: "Alle 12 Doc-Types — der No-Brainer",
+                setup: "2.997€",
+                monthly: "497€",
                 features: [
-                  "Up to 4 custom document templates",
-                  "Full system setup & testing",
-                  "Onboarding call",
-                  "Monthly maintenance & support",
-                  "Template adjustments included",
+                  "Alle 12 Doc-Vorlagen: Bestellnotiz, Angebots-Draft, Beratungs-Protokoll, Reklamation, Lieferanten-Abstimmung, ToDo-Liste, Kunden-Historie, Preis-Memo, Rückfrage-Ticket, Produkt-Info-Request, Termin-Protokoll, Eskalations-Memo",
+                  "Installation auf bis zu 15 Innendienst-PCs",
+                  "Prozess-Audit + Full-Setup auf Ihre Artikelstruktur",
+                  "Wöchentliche Check-ins Monat 1+2",
+                  "Laufende Vorlagen-Anpassungen",
+                  "Priority Support",
+                  "Nur 500€ mehr Setup als Starter — für 4× so viele Doc-Types",
                 ],
                 highlight: true,
               },
               {
-                name: "Custom",
-                desc: "Complex workflows",
-                setup: "from €1,500",
-                monthly: "from €300",
+                name: "Komplett",
+                desc: "Unbegrenzte MA + Meister-Wiki",
+                setup: "4.997€",
+                monthly: "797€",
                 features: [
-                  "Unlimited document types",
-                  "Multi-workflow & multi-call-type setup",
-                  "Full system setup & testing",
-                  "Onboarding call",
-                  "Priority support",
+                  "Alle 12 Doc-Vorlagen",
+                  "Installation auf unbegrenzt vielen Innendienst-PCs",
+                  "Meister-Wiki: intelligente Wissensdatenbank aus allen Calls, durchsuchbar nach Kunde, Artikel, Lieferant",
+                  "Multi-Workflow Setup (mehrere Niederlassungen möglich)",
+                  "Priority Support mit SLA",
+                  "Quartals-Reviews & Optimierungs-Workshops",
                 ],
                 highlight: false,
               },
@@ -470,7 +495,7 @@ export default function LandingPage() {
                 >
                   {plan.highlight && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-400 text-blue-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                      Most Popular
+                      Bestseller — Empfehlung
                     </div>
                   )}
                   <h3 className="font-bold text-xl mb-1 text-white">{plan.name}</h3>
@@ -480,7 +505,7 @@ export default function LandingPage() {
                   <div className="mb-2">
                     <span className="text-3xl font-extrabold text-white">{plan.setup}</span>
                     <span className={`text-sm ml-1 ${plan.highlight ? "text-blue-200" : "text-slate-500"}`}>
-                      setup
+                      Setup
                     </span>
                   </div>
                   <div className="mb-8">
@@ -488,7 +513,7 @@ export default function LandingPage() {
                       {plan.monthly}
                     </span>
                     <span className={`text-sm ml-1 ${plan.highlight ? "text-blue-200" : "text-slate-500"}`}>
-                      / month
+                      / Monat
                     </span>
                   </div>
                   <ul className="space-y-3 mb-8 flex-1">
@@ -509,7 +534,7 @@ export default function LandingPage() {
                         : "bg-slate-800 text-white hover:bg-slate-700 border border-slate-700"
                     }`}
                   >
-                    Book a free call
+                    Kostenloses Gespräch buchen
                   </Link>
                 </GlowCard>
               </StaggerItem>
@@ -523,12 +548,13 @@ export default function LandingPage() {
         <div className="max-w-2xl mx-auto">
           <FadeIn>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 leading-tight">
-              Ready to stop writing docs manually?
+              Bereit, Ihren Innendienst zu entlasten?
             </h2>
             <p className="text-slate-400 text-lg mb-10">
-              Book a free 15-minute call. We&apos;ll look at your workflow and
-              tell you exactly what we&apos;d build for you — no commitment, no
-              pitch deck.
+              Buchen Sie ein kostenloses 15-Min Gespräch. Wir schauen uns
+              Ihre Call-Typen und Ihren Innendienst-Alltag an und sagen
+              Ihnen genau, was wir für Ihre Niederlassung bauen würden —
+              ohne Verpflichtung, ohne Pitch Deck.
             </p>
             <ShimmerLink
               href={CALENDLY_URL}
@@ -536,9 +562,9 @@ export default function LandingPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-base font-semibold px-10 py-4 rounded-xl transition-colors duration-200 shadow-lg shadow-blue-900/40 cursor-pointer"
             >
-              Book your free call <ArrowRight className="w-5 h-5" />
+              Kostenloses Gespräch buchen <ArrowRight className="w-5 h-5" />
             </ShimmerLink>
-            <p className="text-slate-600 text-sm mt-4">No commitment. No pitch deck.</p>
+            <p className="text-slate-600 text-sm mt-4">Keine Verpflichtung. Kein Pitch.</p>
           </FadeIn>
         </div>
       </section>
@@ -550,7 +576,7 @@ export default function LandingPage() {
             The <span className="text-blue-500">AI</span> Maniac
           </span>
           <p className="text-slate-600 text-xs">
-            © {new Date().getFullYear()} The AI Maniac. All rights reserved.
+            © {new Date().getFullYear()} The AI Maniac. Alle Rechte vorbehalten.
           </p>
         </div>
       </footer>

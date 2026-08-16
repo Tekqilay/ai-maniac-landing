@@ -7,10 +7,10 @@ import { FileText, Check, ListChecks, Mic, Brain, FileCheck } from "lucide-react
 import { OrbitVisual, type OrbitMode } from "./orbit-visual";
 
 const LINES = [
-  "Client discussed Q2 pipeline targets...",
-  "Follow-up call required by Friday...",
-  "Budget approved — send proposal ASAP...",
-  "Onboarding scheduled for next Tuesday...",
+  "Bestellung: 120x Hager FI/LS B16, Liefertermin KW18...",
+  "Angebotsanfrage Schaltschrank-Bau, Budget ca. 18.500€...",
+  "Reklamation Charge Siemens LOGO! — 3 Geräte defekt...",
+  "Rückfrage Lieferant Phoenix Contact: Preis Klemmen...",
 ];
 
 type DemoPhase = "idle" | "recording" | "processing" | "done";
@@ -36,10 +36,10 @@ function SoundWaves({ active }: { active: boolean }) {
 
 function PhaseIndicator({ phase }: { phase: DemoPhase }) {
   const steps = [
-    { id: "idle",       icon: <Mic className="w-3.5 h-3.5" />,       label: "Record" },
-    { id: "recording",  icon: <Mic className="w-3.5 h-3.5" />,       label: "Recording" },
-    { id: "processing", icon: <Brain className="w-3.5 h-3.5" />,     label: "Processing" },
-    { id: "done",       icon: <FileCheck className="w-3.5 h-3.5" />, label: "Done" },
+    { id: "idle",       icon: <Mic className="w-3.5 h-3.5" />,       label: "Aufnehmen" },
+    { id: "recording",  icon: <Mic className="w-3.5 h-3.5" />,       label: "Aufnahme läuft" },
+    { id: "processing", icon: <Brain className="w-3.5 h-3.5" />,     label: "Verarbeitung" },
+    { id: "done",       icon: <FileCheck className="w-3.5 h-3.5" />, label: "Fertig" },
   ];
   const activeIndex = steps.findIndex(s => s.id === phase);
 
@@ -89,10 +89,10 @@ function TranscriptionPanel({ visibleLines, active }: { visibleLines: number; ac
           transition={{ duration: 1, repeat: Infinity }}
         />
         <span className="text-slate-400 text-xs font-semibold tracking-widest uppercase">
-          Auto-Transcription
+          Auto-Transkription
         </span>
         {active && visibleLines > 0 && (
-          <span className="ml-auto text-blue-400 text-xs">Analysing...</span>
+          <span className="ml-auto text-blue-400 text-xs">Analysiert...</span>
         )}
       </div>
       <div className="space-y-2 min-h-[88px]">
@@ -112,7 +112,7 @@ function TranscriptionPanel({ visibleLines, active }: { visibleLines: number; ac
           ))}
         </AnimatePresence>
         {visibleLines === 0 && (
-          <p className="text-slate-600 text-sm italic">Waiting for recording to finish...</p>
+          <p className="text-slate-600 text-sm italic">Warten auf Ende der Aufnahme...</p>
         )}
       </div>
     </motion.div>
@@ -220,14 +220,15 @@ export function DemoSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <p className="text-blue-500 text-sm font-semibold uppercase tracking-widest mb-4">
-            How It Actually Works
+            So funktioniert es
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Record. Walk away. Documents arrive.
+            Call annehmen. Auflegen. Dokumente sind fertig.
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto">
-            When your call ends, the system automatically transcribes the audio and
-            generates your custom documents — no input required.
+            Jeder Call im Innendienst wird am PC mitgeschnitten, automatisch
+            transkribiert und in Ihre Dokumenten-Vorlagen verwandelt — Bestellnotiz,
+            Angebot, Reklamations-Protokoll. Ohne einen einzigen Tastendruck.
           </p>
         </div>
 
@@ -254,8 +255,8 @@ export function DemoSection() {
               />
               <Mic className="w-4 h-4 text-slate-400" />
               <SoundWaves active={isRecording} />
-              <span className="text-slate-400 text-xs font-medium w-20">
-                {isRecording ? "Recording..." : isProcessing ? "Processing..." : "Ready"}
+              <span className="text-slate-400 text-xs font-medium w-24">
+                {isRecording ? "Aufnahme..." : isProcessing ? "Verarbeitung..." : "Bereit"}
               </span>
             </div>
           </div>
@@ -268,7 +269,7 @@ export function DemoSection() {
                 animate={{ opacity: isProcessing ? 1 : 0.15 }}
                 transition={{ duration: 0.6 }}
               />
-              <span className="text-slate-600 text-xs shrink-0">AI processing</span>
+              <span className="text-slate-600 text-xs shrink-0">KI-Verarbeitung</span>
               <motion.div
                 className="h-px flex-1 bg-gradient-to-l from-transparent to-blue-600/60"
                 animate={{ opacity: isProcessing ? 1 : 0.15 }}
@@ -286,15 +287,15 @@ export function DemoSection() {
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 >
                   <DocumentCard
-                    title="Meeting Summary"
+                    title="Bestellnotiz"
                     icon={<FileText className="w-4 h-4 text-blue-400" />}
-                    items={["Key decisions recorded", "Context preserved", "Ready to share"]}
+                    items={["120x Hager FI/LS B16", "Liefertermin KW18", "Kunde: Elektro Becker"]}
                     delay={0}
                   />
                   <DocumentCard
-                    title="To-Do List"
+                    title="ToDo-Liste Team"
                     icon={<ListChecks className="w-4 h-4 text-blue-400" />}
-                    items={["Send proposal today", "Schedule follow-up", "Update CRM"]}
+                    items={["Angebot Schaltschrank bis Mi", "Reklamation Siemens einreichen", "Rückruf Phoenix Contact"]}
                     delay={0.4}
                   />
                 </motion.div>
