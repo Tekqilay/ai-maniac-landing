@@ -40,23 +40,41 @@ export function SmoothScroll() {
    parallax + scroll-darken (sstr initHeroScrollDarken). Element is a
    <video> with poster so the premium video drops in later untouched.
    Static full-bleed layout is the CSS default (no-JS / reduced motion). */
+const COUNTER_TARGET = 30;
+
 export function HeroTower({
   scrubStart = 0,
   poster = "/assets/poster_lights.png",
+  showCounter = false,
+  showAnchorLine = false,
 }: {
   // Seconds into the clip where the scrub (and the poster frame) begin.
   scrubStart?: number;
   poster?: string;
+  showCounter?: boolean;
+  showAnchorLine?: boolean;
 }) {
   const scope = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
+      // Whole integers only — a fractional count would flicker on scroll.
+      const setCount = (progress: number) => {
+        if (!counterRef.current) return;
+        const n = Math.round(
+          gsap.utils.clamp(0, 1, progress) * COUNTER_TARGET
+        );
+        counterRef.current.textContent = String(n);
+      };
+
       // Shared: the frame expands from a rounded 78% mask to full bleed,
-      // plus parallax and the scroll-darken pass.
+      // plus parallax. The overlay runs the other way round — the scene
+      // gets lighter and warmer as the calendar fills, so the image agrees
+      // with the message instead of contradicting it.
       const buildIntro = (tl: gsap.core.Timeline) => {
         tl.fromTo(
           ".ht-frame",
@@ -71,9 +89,15 @@ export function HeroTower({
           )
           .fromTo(
             ".ht-darken",
+            { opacity: 0.35 },
+            { opacity: 0.12, ease: "none", duration: 0.75 },
+            0.25
+          )
+          .fromTo(
+            ".ht-warm",
             { opacity: 0 },
-            { opacity: 0.45, ease: "none", duration: 0.3 },
-            0.2
+            { opacity: 0.1, ease: "none", duration: 0.75 },
+            0.25
           );
       };
 
@@ -110,6 +134,7 @@ export function HeroTower({
           );
 
           const playhead = { t: 0 };
+          setCount(0);
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: scope.current,
@@ -128,6 +153,8 @@ export function HeroTower({
               ease: "none",
               duration: 0.75,
               onUpdate: () => {
+                // Counter shares the scrub progress with the playhead.
+                setCount(playhead.t);
                 const d = video.duration;
                 if (!d || Number.isNaN(d)) return;
                 const end = d - 0.05;
@@ -157,12 +184,25 @@ export function HeroTower({
           video.preload = "auto";
           video.load();
 
+          // Counter rides along with the single playback pass.
+          setCount(0);
+          let raf = 0;
+          const tick = () => {
+            const d = video.duration;
+            if (d && !Number.isNaN(d)) {
+              setCount((video.currentTime - scrubStart) / (d - scrubStart));
+            }
+            if (!video.paused && !video.ended) raf = requestAnimationFrame(tick);
+            else setCount(1);
+          };
+
           const io = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                   if (scrubStart > 0) video.currentTime = scrubStart;
-                  video.play().catch(() => {});
+                  video.play().catch(() => setCount(1));
+                  raf = requestAnimationFrame(tick);
                   io.disconnect();
                 }
               });
@@ -181,7 +221,10 @@ export function HeroTower({
           });
           buildIntro(tl);
 
-          return () => io.disconnect();
+          return () => {
+            io.disconnect();
+            cancelAnimationFrame(raf);
+          };
         }
       );
 
@@ -209,27 +252,63 @@ export function HeroTower({
             <source src="/assets/scrub_lights.webm" type="video/webm" />
             <source src="/assets/scrub_lights.mp4" type="video/mp4" />
           </video>
-          <div className="ht-darken absolute inset-0 bg-[#060A12] opacity-40 pointer-events-none" />
+          <div className="ht-darken absolute inset-0 bg-[#060A12] opacity-[0.35] pointer-events-none" />
+          {/* warm lift, rises as the darken layer falls away */}
+          <div className="ht-warm absolute inset-0 bg-[#E8A33D] opacity-0 mix-blend-soft-light pointer-events-none" />
           {/* static readability gradient behind the copy, independent of the scrub darken */}
           <div className="absolute inset-y-0 left-0 w-full sm:w-3/5 bg-gradient-to-r from-[#060A12]/55 to-transparent pointer-events-none" />
           <div className="absolute inset-0 flex items-center">
+            {/* The counter adds two blocks, which overflows the viewport on
+                small screens — tighten the rhythm there, only in that case. */}
             <div className="px-7 sm:px-14 max-w-xl">
-              <p className="text-sm font-medium text-white/70 mb-6 leading-relaxed max-w-md">
+              <p
+                className={`text-sm font-medium text-white/70 leading-relaxed max-w-md ${
+                  showCounter ? "mb-3 sm:mb-6" : "mb-6"
+                }`}
+              >
                 Sie lesen das hier, weil eine E-Mail von uns Sie neugierig
                 gemacht hat. Genau so gewinnen Sie Ihre nächsten Kunden.
               </p>
-              <h1 className="[font-family:var(--v1-display)] font-black text-white text-[clamp(2.4rem,5.5vw,4.4rem)] leading-[1.02] tracking-tight mb-8">
+              <h1
+                className={`[font-family:var(--v1-display)] font-black text-white text-[clamp(2.4rem,5.5vw,4.4rem)] leading-[1.02] tracking-tight ${
+                  showCounter ? "mb-4 sm:mb-8" : "mb-8"
+                }`}
+              >
                 Ihr Kalender füllt sich{" "}
                 <span className="relative inline-block">
                   <span className="absolute inset-x-[-0.12em] bottom-[0.05em] top-[0.28em] bg-[#F7E948]" />
                   <span className="relative text-[#1A1A18]">von selbst.</span>
                 </span>
               </h1>
-              <p className="text-lg text-white/85 max-w-md leading-relaxed mb-10">
+              <p
+                className={`text-white/85 max-w-md leading-relaxed ${
+                  showCounter || showAnchorLine
+                    ? "text-base sm:text-lg mb-4 sm:mb-7"
+                    : "text-lg mb-10"
+                }`}
+              >
                 Cold-E-Mail-Terminierung für Recruiting-Agenturen: Wir
                 schreiben Geschäftsführer direkt an, mit Terminvorschlag in
                 jeder Mail. Wer antwortet, will reden.
               </p>
+              {showAnchorLine && (
+                <p className="text-sm font-medium text-white/70 mb-2 leading-relaxed max-w-md">
+                  Jedes Licht: ein Geschäftsführer, der zugesagt hat.
+                </p>
+              )}
+              {showCounter && (
+                // Renders the end value, so no-JS and reduced motion show
+                // "30 Termine" without counting up.
+                <p className="[font-family:var(--v1-display)] font-black text-white text-3xl sm:text-4xl tracking-tight mb-5 sm:mb-9">
+                  <span
+                    ref={counterRef}
+                    className="bg-[#F7E948] text-[#1A1A18] px-2 py-0.5"
+                  >
+                    {COUNTER_TARGET}
+                  </span>{" "}
+                  Termine
+                </p>
+              )}
               <a
                 href="#"
                 className="inline-block bg-[#F7E948] text-[#1A1A18] font-semibold px-8 py-4 transition-colors duration-300 ease-out hover:bg-[#FFF06E]"

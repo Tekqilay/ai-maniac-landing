@@ -28,9 +28,15 @@ const body = IBM_Plex_Sans({
 export function LightsPage({
   scrubStart,
   poster,
+  showCounter = false,
+  showAnchorLine = false,
 }: {
   scrubStart: number;
   poster: string;
+  // Hero variants under test: a scroll-coupled appointment counter and
+  // the line that ties the lights to the counter.
+  showCounter?: boolean;
+  showAnchorLine?: boolean;
 }) {
   return (
     <div
@@ -52,7 +58,12 @@ export function LightsPage({
       </header>
 
       {/* 1 — Hero: "Die Lichter gehen an" */}
-      <HeroTower scrubStart={scrubStart} poster={poster} />
+      <HeroTower
+        scrubStart={scrubStart}
+        poster={poster}
+        showCounter={showCounter}
+        showAnchorLine={showAnchorLine}
+      />
 
       {/* 2 — The email that made that appointment */}
       <section className="px-6 sm:px-12 pt-20 pb-16 sm:pt-28 sm:pb-20 max-w-7xl mx-auto grid gap-12 lg:grid-cols-[2fr_3fr] items-center">
